@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @author.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @author.last_name %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @author.dob %>
+</p>
+
+<%= link_to 'Edit', edit_author_path(@author) %> |
+<%= link_to 'Back', authors_path %>
+<%= link_to 'New Book', new_author_book_path(@author) %>
+
+
+<table>
+  <thead>
+    <th>Title</th>
+    <th>Genre</th>
+    <th>Published</th>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+    <% if(book.author_id == @author.id) %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.genre %></td>
+        <td><%= book.published %></td>
+        <td><%= link_to 'See More', author_book_path(@author, book) %></td>
+        <td><%= link_to 'Delete', author_book_url(@author, book), method: :delete %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
